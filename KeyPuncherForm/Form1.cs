@@ -51,7 +51,14 @@ namespace KeyPuncherForm
                 string text = Clipboard.GetText();
                 // Update RichTextBox with copied text
                 richTextBox1.Text = "";
-                richTextBox1.AppendText(text + Environment.NewLine);
+                if (HideText.Checked)
+                {
+                    richTextBox1.AppendText("************" + Environment.NewLine);
+                }
+                else {
+                    richTextBox1.AppendText(text + Environment.NewLine);
+                }
+                
                 System.Threading.Thread.Sleep(1000);
                 // Simulate typing the copied text
                 foreach (char c in text)
@@ -201,7 +208,15 @@ namespace KeyPuncherForm
                         {
                             // Directly append unhandled characters
                             // Ensure richTextBox1 or similar output is available and correctly handled
-                            richTextBox1.AppendText(c.ToString());
+                            if (HideText.Checked)
+                            {
+                                richTextBox1.AppendText("*");
+                            }
+                            else
+                            {
+                                richTextBox1.AppendText(c.ToString());
+                            }
+                            
                         }
                         break;
                 }
@@ -349,7 +364,14 @@ namespace KeyPuncherForm
                         {
                             // Directly append unhandled characters
                             // Ensure richTextBox1 or similar output is available and correctly handled
-                            richTextBox1.AppendText(c.ToString());
+                            if (HideText.Checked)
+                            {
+                                richTextBox1.AppendText("*");
+                            }
+                            else
+                            {
+                                richTextBox1.AppendText(c.ToString());
+                            }
                         }
                         break;
                 }
