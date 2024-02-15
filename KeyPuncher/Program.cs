@@ -11,6 +11,7 @@ namespace KeyPuncher
     {
         static void Main(string[] args)
         {
+            Console.WriteLine();
         }
     }
 }
