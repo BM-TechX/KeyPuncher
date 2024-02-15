@@ -317,6 +317,7 @@ namespace KeyPuncherForm
                         keyCodeKey = VirtualKeyCode.OEM_102;
                         break;
                     case '@':
+                        shiftNeeded= true;
                         keyCodeKey = VirtualKeyCode.VK_2;
                         break;
                     case '£':
@@ -400,6 +401,15 @@ namespace KeyPuncherForm
                 int keyCode = c - keyCodeOffset + 0x41; // 0x41 is VirtualKeyCode for 'A'
                 return (GregsStack.InputSimulatorStandard.Native.VirtualKeyCode)keyCode;
             }
+            else if (char.IsSeparator(c))
+            {
+                return GregsStack.InputSimulatorStandard.Native.VirtualKeyCode.TAB;
+            }
+            else if (char.IsWhiteSpace(c))
+            {
+                return GregsStack.InputSimulatorStandard.Native.VirtualKeyCode.SPACE;
+            }
+            
             else if (char.IsDigit(c))
             {
                 if (c == '0')
