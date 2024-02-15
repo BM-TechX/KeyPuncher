@@ -25,7 +25,7 @@ jobs:
       run: dotnet build KeyPuncher.sln --configuration Release --no-restore
 
     - name: Publish the project
-      run: dotnet publish KeyPuncher.csproj -c Release -o ./publish
+      run: dotnet publish /KeyPuncher/KeyPuncher.csproj -c Release -o ./publish
 
     - name: Zip the build output
       uses: actions/upload-artifact@v2
