@@ -1,0 +1,73 @@
+name: Build and release
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v6
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Test
+      run: dotnet test KeyPuncherForm.Tests -c Release
+
+    # Self-contained single file, so it runs on a machine without .NET installed.
+    - name: Publish
+      run: >
+        dotnet publish KeyPuncherForm/KeyPuncherForm.csproj -c Release -r win-x64
+        --self-contained true
+        -p:PublishSingleFile=true
+        -p:IncludeNativeLibrariesForSelfExtract=true
+        -p:EnableCompressionInSingleFile=true
+        -p:DebugType=none
+        -o publish
+
+    - name: Package
+      shell: pwsh
+      run: |
+        New-Item -ItemType Directory KeyPuncher | Out-Null
+        Copy-Item publish/KeyPuncherForm.exe KeyPuncher/KeyPuncher.exe
+        Copy-Item README.md KeyPuncher/
+        Compress-Archive KeyPuncher KeyPuncher-win-x64.zip
+
+    - uses: actions/upload-artifact@v7
+      with:
+        name: KeyPuncher-win-x64
+        path: KeyPuncher-win-x64.zip
+
+  release:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+    needs: build
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/download-artifact@v8
+      with:
+        name: KeyPuncher-win-x64
+
+    - name: Publish GitHub release
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: >
+        gh release create "v1.0.${{ github.run_number }}" KeyPuncher-win-x64.zip
+        --repo "${{ github.repository }}"
+        --target "${{ github.sha }}"
+        --title "KeyPuncher 1.0.${{ github.run_number }}"
+        --generate-notes
+        --latest

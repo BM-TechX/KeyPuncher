@@ -30,7 +30,7 @@
         {
             richTextBox1 = new RichTextBox();
             HideText = new CheckBox();
-            EngLang = new CheckBox();
+            LayoutBox = new ComboBox();
             SuspendLayout();
             // 
             // richTextBox1
@@ -49,7 +49,7 @@
             HideText.AutoSize = true;
             HideText.Checked = true;
             HideText.CheckState = CheckState.Checked;
-            HideText.Location = new Point(450, 195);
+            HideText.Location = new Point(440, 195);
             HideText.Margin = new Padding(2);
             HideText.Name = "HideText";
             HideText.Size = new Size(89, 19);
@@ -57,22 +57,21 @@
             HideText.Text = "Text Hidden";
             HideText.UseVisualStyleBackColor = true;
             // 
-            // EngLang
+            // LayoutBox
             // 
-            EngLang.AutoSize = true;
-            EngLang.Location = new Point(451, 169);
-            EngLang.Name = "EngLang";
-            EngLang.Size = new Size(65, 19);
-            EngLang.TabIndex = 2;
-            EngLang.Text = "EngKey";
-            EngLang.UseVisualStyleBackColor = false;
+            LayoutBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            LayoutBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            LayoutBox.Location = new Point(420, 165);
+            LayoutBox.Name = "LayoutBox";
+            LayoutBox.Size = new Size(112, 23);
+            LayoutBox.TabIndex = 2;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(536, 225);
-            Controls.Add(EngLang);
+            Controls.Add(LayoutBox);
             Controls.Add(HideText);
             Controls.Add(richTextBox1);
             Margin = new Padding(2);
@@ -87,6 +86,6 @@
 
         private RichTextBox richTextBox1;
         private CheckBox HideText;
-        private CheckBox EngLang;
+        private ComboBox LayoutBox;
     }
 }

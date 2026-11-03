@@ -11,8 +11,4 @@
     <RollForward>LatestMajor</RollForward>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="GregsStack.InputSimulatorStandard" Version="1.3.5" />
-  </ItemGroup>
-
 </Project>
