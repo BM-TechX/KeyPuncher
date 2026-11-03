@@ -39,10 +39,10 @@ jobs:
     - name: Package
       shell: pwsh
       run: |
-        New-Item -ItemType Directory KeyPuncher | Out-Null
-        Copy-Item publish/KeyPuncherForm.exe KeyPuncher/KeyPuncher.exe
-        Copy-Item README.md KeyPuncher/
-        Compress-Archive KeyPuncher KeyPuncher-win-x64.zip
+        New-Item -ItemType Directory package/KeyPuncher | Out-Null
+        Copy-Item publish/KeyPuncherForm.exe package/KeyPuncher/KeyPuncher.exe
+        Copy-Item README.md package/KeyPuncher/
+        Compress-Archive package/KeyPuncher KeyPuncher-win-x64.zip
 
     - uses: actions/upload-artifact@v7
       with:
