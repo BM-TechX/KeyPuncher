@@ -19,4 +19,4 @@ Leave the keyboard and mouse alone until it has finished. Line breaks are typed 
 
 - **Layout:** if the wrong characters come out, the selected layout does not match the remote desktop.
 - **Characters with no key:** curly quotes, long dashes and similar are typed as their plain versions (`"`, `-`). A letter whose accent the layout cannot type loses the accent, such as `É` on French AZERTY. Anything else, such as emoji, is left out. KeyPuncher shows a warning in its window when characters lost an accent or were left out.
-- **Text Hidden:** this keeps the clipboard text and the characters in those warnings out of the KeyPuncher window, which is useful for passwords.
+- **Hide text:** this keeps the clipboard text and the characters in those warnings out of the KeyPuncher window, which is useful for passwords.

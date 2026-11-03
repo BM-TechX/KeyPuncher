@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>KeyPuncher.ico</ApplicationIcon>
     <!-- Machine has WindowsDesktop runtime 6.0 and 9.0 but not 8.0; allow the
          net8.0 build to run on a newer installed major-version runtime. -->
     <RollForward>LatestMajor</RollForward>

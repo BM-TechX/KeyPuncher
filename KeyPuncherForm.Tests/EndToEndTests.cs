@@ -139,7 +139,16 @@ namespace KeyPuncherForm.Tests
         {
             using Process app = Process.Start(Environment.GetEnvironmentVariable("KEYPUNCHER_E2E_APP")!);
             Thread.Sleep(2500);
-            string? saved = _form.Invoke(() => Clipboard.ContainsText() ? Clipboard.GetText() : null);
+            string? saved = _form.Invoke(() =>
+            {
+                // Only plain text can be put back afterwards, so don't overwrite an image or copied files.
+                if (!Clipboard.ContainsText() && Clipboard.GetDataObject()?.GetFormats().Length > 0)
+                {
+                    throw new InvalidOperationException("The clipboard holds something other than text.");
+                }
+
+                return Clipboard.ContainsText() ? Clipboard.GetText() : null;
+            });
             try
             {
                 _form.Invoke(() =>
